@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/mail_send.js"></script>
+
+    <title>AJAX-отправка писем с помощью jQuery и PHP</title>
+
+    <script>
+     // $('.mail_send').ajaxMailSend();
+    </script>
+
+</head>
+<body>
+<div class="wrapper">
+    <div class="form">
+        <div class="head">Форма отправки сообщений 1</div>
+        <form id="form_1" class="mail_send" name="form_1" action="#" method="post">
+            <div class="message"></div>
+            <input type="text" class="name required" placeholder="Ваше имя"/> <br>
+            <input type="text" class="email required" placeholder="Ваш e-mail"/><br>
+            <input type="text" class="phone required" placeholder="Ваш телефон" /><br>
+            <input type="button" class="send_data" value="Отправить"/>
+        </form>
+    </div>
+    <div class="form">
+        <div class="head">Форма отправки сообщений 2</div>
+        <form id="form_2" class="mail_send" name="form_2" action="#" method="post">
+            <div class="message"></div>
+            <input type="text" class="name" placeholder="Ваше имя"/> <br>
+            <input type="text" class="email" placeholder="Ваш e-mail"/><br>
+            <input type="text" class="phone" placeholder="Ваш телефон" /><br>
+            <input type="button" class="send_data" value="Отправить"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>
