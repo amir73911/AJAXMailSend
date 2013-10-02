@@ -13,8 +13,12 @@
 
     <script>
         $(document).ready(function() {
-            $('#form_1').ajaxMailSend();
-            $('#form_2').ajaxMailSend();
+            $('#form_1').ajaxMailSend({
+                mail_to : 'gafurovamir@gmail.com'
+            });
+            $('#form_2').ajaxMailSend({
+                mail_to : 'miramir-91@mail.ru'
+            });
         });
     </script>
 

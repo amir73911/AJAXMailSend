@@ -1,5 +1,5 @@
 <?php
-$sendto  = $_POST['to_mail'];
+$sendto  = $_POST['mail_to'];
 $name = $_POST['name'];
 $phone = $_POST['phone'];
 $email = $_POST['email'];

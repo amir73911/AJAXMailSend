@@ -1,9 +1,13 @@
 (function( $ ){
-    $.fn.ajaxMailSend = function() {
+    $.fn.ajaxMailSend = function(options) {
+
+        var options = $.extend( {
+            mail_to : 'gafurovamir@gmail.com'
+        }, options);
 
         var form = this;
         var button = this.find(".send_data");
-        var to_mail = 'gafurovamir@gmail.com';
+
         var message_block = form.find(".message");
         var name  = form.find(".name").val();
         var email = form.find(".email").val();
@@ -36,7 +40,7 @@
                     type: 'POST',
                     url: 'php/mail_send.php',
                     data: {
-                        "to_mail": to_mail,
+                        "mail_to": options.mail_to,
                         "name": name,
                         "phone": phone,
                         "email": email
