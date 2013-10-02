@@ -12,7 +12,10 @@
     <title>AJAX-отправка писем с помощью jQuery и PHP</title>
 
     <script>
-     // $('.mail_send').ajaxMailSend();
+        $(document).ready(function() {
+            $('#form_1').ajaxMailSend();
+            $('#form_2').ajaxMailSend();
+        });
     </script>
 
 </head>
