@@ -1,21 +1,38 @@
 (function( $ ){
     $.fn.ajaxMailSend = function(options) {
 
+        var form = this;
+
+        // стандартные опции
         var options = $.extend( {
-            mail_to : 'gafurovamir@gmail.com'
+            mail_to : 'gafurovamir@gmail.com',      // адрес, на который отправлять
+            message_block : '.message',  // класс блока сообщений
+            send_button : '.send_button'   // кнопка отправки
         }, options);
 
-        var form = this;
-        var button = this.find(".send_data");
 
-        var message_block = form.find(".message");
-        var name  = form.find(".name").val();
-        var email = form.find(".email").val();
-        var phone = form.find(".phone").val();
-        var all_required = form.find(".required");
-        var empty_fields = 0;
+        // кнопка отправки
+        var button = form.find(options.send_button);
 
-        button.on("click", function(){
+        // если пользователь не указал где выводить сообщения, то создаем его с классом .message
+        if (form.find(options.message_block).length == 0){
+            form.append('<div class="'+options.message_block.replace(/\./g, "")+'"></div>');
+        }
+
+        // блок для вывода сообщений
+        var message_block = form.find(options.message_block);
+
+
+        // действия при клике
+        button.on("click", function(e){
+
+            e.preventDefault();
+
+            var name  = form.find(".name").val();
+            var email = form.find(".email").val();
+            var phone = form.find(".phone").val();
+            var all_required = form.find(".required");
+            var empty_fields = 0;
 
             button.val("Отправка...");
 
