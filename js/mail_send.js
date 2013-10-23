@@ -16,10 +16,11 @@
 
         // выводим или не выводим блок сообщений
         if (options.show_message_block) {
-            form.append('<div class="message"></div>');
+            form.prepend('<div class="message"></div>');
 
             // блок для вывода сообщений
-            var message_block = form.find('.'+options.message_block);
+            var message_block = form.find('.message');
+
         }
 
         form.append('<input type="hidden" name="mail_to" value="'+options.mail_to+'"/>');
