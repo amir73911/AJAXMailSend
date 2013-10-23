@@ -26,32 +26,35 @@
         form.append('<input type="hidden" name="mail_to" value="'+options.mail_to+'"/>');
 
 
+        var all_required = form.find(".required");
+        var empty_fields = 0;
+
+        all_required.each(function() {
+            $(this).blur(function() {
+                if(!$.trim($(this).val())) {
+                    $(this).addClass('error');
+                } else {
+                    $(this).removeClass('error');
+                }
+            });
+        });
+
 
         // действия при клике
         button.click(function(e){
 
             e.preventDefault();
 
-            var all_required = form.find(".required");
-            var empty_fields = 0;
-
             button.val("Отправка...");
 
             all_required.each(function() {
                 if(!$.trim($(this).val())) {
                     empty_fields++;
+                    $(this).addClass('error');
                 }
             });
 
-            all_required.each(function() {
-                $(this).blur(function() {
-                    if(!$.trim($(this).val())) {
-                        $(this).addClass('error');
-                    } else {
-                        $(this).removeClass('error');
-                    }
-                });
-            });
+
 
             var data = form.serialize();
 
@@ -62,16 +65,37 @@
                     data: data,
                     success: function(msg) {
                         if(msg == "true") {
-                            if (options.show_message_block){message_block.removeClass('error').addClass('fine').html('Отправлено!').slideDown(100).delay(3000).slideUp(200)}
+                            if (options.show_message_block){
+                                message_block.removeClass('error')
+                                    .addClass('fine')
+                                    .html('Отправлено!')
+                                    .slideDown(100)
+                                    .delay(3000)
+                                    .slideUp(200)
+                            }
                             button.val("Отправлено!");
                         } else {
-                            if (options.show_message_block){message_block.removeClass('fine').addClass('error').html('Ошибка!').slideDown(100).delay(3000).slideUp(200)}
+                            if (options.show_message_block){
+                                message_block.removeClass('fine')
+                                    .addClass('error')
+                                    .html('Ошибка!')
+                                    .slideDown(100)
+                                    .delay(3000)
+                                    .slideUp(200)
+                            }
                             button.val("Ошибка!");
                         }
                     }
                 });
             } else {
-                if (options.show_message_block){message_block.removeClass('fine').addClass('error').html('Вы не заполнили обязательные поля').slideDown(100).delay(3000).slideUp(200)}
+                if (options.show_message_block){
+                    message_block.removeClass('fine')
+                        .addClass('error')
+                        .html('Вы не заполнили обязательные поля')
+                        .slideDown(100)
+                        .delay(3000)
+                        .slideUp(200)
+                }
                 button.val("Ошибка!");
             };
 
