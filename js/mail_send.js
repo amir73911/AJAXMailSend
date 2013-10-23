@@ -24,10 +24,10 @@
         }
 
         form.append('<input type="hidden" name="mail_to" value="'+options.mail_to+'"/>');
-
+        form.append('<input type="hidden" name="email_title" value="'+options.email_title+'"/>');
 
         var all_required = form.find(".required");
-        var empty_fields = 0;
+
 
         all_required.each(function() {
             $(this).blur(function() {
@@ -47,6 +47,7 @@
 
             button.val("Отправка...");
 
+            var empty_fields = 0;
             all_required.each(function() {
                 if(!$.trim($(this).val())) {
                     empty_fields++;
