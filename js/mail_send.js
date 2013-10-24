@@ -7,12 +7,14 @@
         var options = $.extend( {
             mail_to : 'gafurovamir@gmail.com',      // адрес, на который отправлять
             show_message_block : true,  // показывать блока сообщений?
+            error_message : 'Вы не заполнили обязательные поля',
             send_button : '.send_button'   // кнопка отправки
         }, options);
 
 
         // кнопка отправки
         var button = form.find(options.send_button);
+        var default_val = button.val();
 
         // выводим или не выводим блок сообщений
         if (options.show_message_block) {
@@ -59,13 +61,13 @@
 
             var data = form.serialize();
 
-            if (!empty_fields>0) {
+            if (!empty_fields>0) { // все обязательне поля заполенены
                 $.ajax({
                     type: 'POST',
                     url: 'php/mail_send.php',
                     data: data,
                     success: function(msg) {
-                        if(msg == "true") {
+                        if(msg == "true") { // если отправлено
                             if (options.show_message_block){
                                 message_block.removeClass('error')
                                     .addClass('fine')
@@ -75,7 +77,8 @@
                                     .slideUp(200)
                             }
                             button.val("Отправлено!");
-                        } else {
+                            setTimeout(function() {button.val(default_val);}, 3000);
+                        } else { // если что-то пошло не так
                             if (options.show_message_block){
                                 message_block.removeClass('fine')
                                     .addClass('error')
@@ -85,19 +88,21 @@
                                     .slideUp(200)
                             }
                             button.val("Ошибка!");
+                            setTimeout(function() {button.val(default_val);}, 3000);
                         }
                     }
                 });
-            } else {
+            } else { // если не заполнены некоторые обязательные поля
                 if (options.show_message_block){
                     message_block.removeClass('fine')
                         .addClass('error')
-                        .html('Вы не заполнили обязательные поля')
+                        .html(options.error_message)
                         .slideDown(100)
                         .delay(3000)
                         .slideUp(200)
                 }
                 button.val("Ошибка!");
+                setTimeout(function() {button.val(default_val);}, 3000);
             };
 
         });
