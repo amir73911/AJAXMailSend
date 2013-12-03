@@ -74,7 +74,6 @@
             if (empty_fields>0) {errors.push(1);}  // если не заполнены некоторые обязательные поля
             if (options.mail_to == '') {errors.push(2);}  // если не выбран email для отправки
 
-
             if (errors.length == 0) { // нет ошибок
                 var data = form.serialize();
                 $.ajax({

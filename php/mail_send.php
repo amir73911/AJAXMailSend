@@ -28,5 +28,4 @@
 	} else {
 		echo "false";
 	}
-
 ?>
