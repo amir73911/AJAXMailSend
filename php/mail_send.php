@@ -5,7 +5,7 @@
 	$phone = isset($_POST['phone']) ? $_POST['phone'] : '';
 	$email = isset($_POST['email']) ? $_POST['email'] : '';
 
-	$email_title = isset($_POST['email_title']) ? $_POST['email_title'] : 'Mail from ajaxMailSend ';
+	$email_title = isset($_POST['email_title']) ? $_POST['email_title'] : '';
 
 	// Формирование заголовка письма
 	$subject  = $email_title;
@@ -16,7 +16,7 @@
 
 	// Формирование тела письма
 	$msg  = "<html><body style='font-family:Arial,sans-serif;'>";
-	$msg .= "<h2 style='font-weight:bold;border-bottom:1px dotted #ccc;'>Новое сообщение</h2>\r\n";
+	$msg .= "<h2 style='font-weight:bold;border-bottom:1px dotted #ccc;'>".$email_title."</h2>\r\n";
 	$msg .= "<p><strong>От кого:</strong> ".$name."</p>\r\n";
 	$msg .= "<p><strong>E-mail:</strong> ".$email."</p>\r\n";
 	$msg .= "<p><strong>Номер:</strong> ".$phone."</p>\r\n";
