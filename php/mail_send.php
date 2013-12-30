@@ -1,14 +1,13 @@
 <?php
 
-	$sendto  = isset($_POST['mail_to']) ? $_POST['mail_to'] : '';
-	$name = isset($_POST['name']) ? $_POST['name'] : '';
-	$phone = isset($_POST['phone']) ? $_POST['phone'] : '';
-	$email = isset($_POST['email']) ? $_POST['email'] : '';
 
-	$email_title = isset($_POST['email_title']) ? $_POST['email_title'] : '';
+	$info = $_POST['info'];
+	$data = $_POST['data'];
 
-	// Формирование заголовка письма
-	$subject  = $email_title;
+	$mail_to  = $info['mail_to'];
+	$email_title  = $info['email_title'];
+	//$email_title = isset($_POST['email_title']) ? $_POST['email_title'] : '';
+
 
 	$headers  = "From: test\r\n";
 	$headers .= "MIME-Version: 1.0\r\n";
@@ -17,13 +16,13 @@
 	// Формирование тела письма
 	$msg  = "<html><body style='font-family:Arial,sans-serif;'>";
 	$msg .= "<h2 style='font-weight:bold;border-bottom:1px dotted #ccc;'>".$email_title."</h2>\r\n";
-	$msg .= "<p><strong>От кого:</strong> ".$name."</p>\r\n";
-	$msg .= "<p><strong>E-mail:</strong> ".$email."</p>\r\n";
-	$msg .= "<p><strong>Номер:</strong> ".$phone."</p>\r\n";
+	foreach ( $data as $key => $value ) {
+    	$msg .= "<p><strong>".$key."</strong> ".$value."</p>\r\n";
+    }
 	$msg .= "</body></html>";
 
 	// отправка сообщения
-	if(mail($sendto, $subject, $msg, $headers)) {
+	if(mail($mail_to, $email_title, $msg, $headers)) {
 		echo "true";
 	} else {
 		echo "false";

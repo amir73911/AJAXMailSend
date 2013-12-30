@@ -2,6 +2,8 @@
     $.fn.ajaxMailSend = function(options) {
 
         var form = this;
+        var info = {};
+        var captions = {};
 
         // стандартные опции
         var options = $.extend( {
@@ -28,9 +30,16 @@
 
         }
 
-        // скрытые поля для корректной отправки
-        form.append('<input type="hidden" name="mail_to" value="'+options.mail_to+'"/>');
-        form.append('<input type="hidden" name="email_title" value="'+options.email_title+'"/>');
+        // создание массива служебной информации
+        info['mail_to'] = options.mail_to;
+        info['email_title'] = options.email_title;
+
+        // создание массива с caption'ами для полей
+//        var captions = form.find('input[type="text"]').map(function(){
+//            captions[$(this).attr('name')] = $(this).data('caption');
+//        });
+//        console.log(captions);
+
 
         // проверка на пустоту обязательного поля при потери фокуса
         var all_required = form.find(".required");
@@ -75,11 +84,12 @@
             if (options.mail_to == '') {errors.push(2);}  // если не выбран email для отправки
 
             if (errors.length == 0) { // нет ошибок
-                var data = form.serialize();
+                var data = form.serializeObject();
                 $.ajax({
                     type: 'POST',
                     url: 'php/mail_send.php',
-                    data: data,
+                    dataType: 'json',
+                    data: { data: data, info: info },
                     success: function(msg) {
                         if(msg == "true") { // если отправлено
                             if (options.show_message_block){
@@ -137,4 +147,22 @@
         });
 
     };
+
+    $.fn.serializeObject = function()
+    {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
 })( jQuery );
