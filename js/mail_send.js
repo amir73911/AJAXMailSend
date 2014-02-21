@@ -21,6 +21,8 @@
         var button = form.find(options.send_button);
         var default_val = button.val();
 
+        button.removeAttr('disabled');
+
         // выводим или не выводим блок сообщений
         if (options.show_message_block) {
             form.prepend('<div class="message"></div>');
@@ -59,7 +61,7 @@
 
             e.preventDefault();
 
-            button.val("Отправка...");
+            button.attr('disabled', 'disabled').val("Отправка...");
             message_block.html("");
 
             // проверка на пустоту обязательных полей
@@ -91,7 +93,7 @@
                     dataType: 'json',
                     data: { data: data, info: info },
                     success: function(msg) {
-                        if(msg == "true") { // если отправлено
+                        if($.trim(msg) == "true") { // если отправлено
                             if (options.show_message_block){
                                 message_block.removeClass('error')
                                     .addClass('fine')
@@ -101,7 +103,6 @@
                                     .slideUp(200)
                             }
                             button.val("Отправлено!");
-                            setTimeout(function() {button.val(default_val);}, 3000);
                         } else { // если что-то пошло не так в php
                             if (options.show_message_block){
                                 message_block.removeClass('fine')
@@ -112,8 +113,8 @@
                                     .slideUp(200)
                             }
                             button.val("Ошибка!");
-                            setTimeout(function() {button.val(default_val);}, 3000);
                         }
+                        setTimeout(function() {button.val(default_val).removeAttr('disabled');}, 3000);
                     }
                 });
             } else { // иначе проходим по массиву ошибок
@@ -140,7 +141,9 @@
                         .slideUp(200)
                 }
                 button.val("Ошибка!");
-                setTimeout(function() {button.val(default_val);}, 3000);
+                setTimeout(function() {
+                    button.val(default_val).removeAttr('disabled');
+                }, 3000);
             }
 
 
