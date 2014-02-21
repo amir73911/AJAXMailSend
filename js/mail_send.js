@@ -29,7 +29,6 @@
 
             // блок для вывода сообщений
             var message_block = form.find('.message');
-
         }
 
         // создание массива служебной информации
@@ -37,11 +36,10 @@
         info['email_title'] = options.email_title;
 
         // создание массива с caption'ами для полей
-//        var captions = form.find('input[type="text"]').map(function(){
-//            captions[$(this).attr('name')] = $(this).data('caption');
-//        });
-//        console.log(captions);
-
+        var inputs = form.find('input[type="text"]');
+        inputs.each(function() {
+            captions[$(this).attr('name')] = $(this).data('caption');
+        });
 
         // проверка на пустоту обязательного поля при потери фокуса
         var all_required = form.find(".required");
@@ -91,7 +89,7 @@
                     type: 'POST',
                     url: 'php/mail_send.php',
                     dataType: 'json',
-                    data: { data: data, info: info },
+                    data: { data: data, info: info, captions: captions },
                     success: function(msg) {
                         if($.trim(msg) == "true") { // если отправлено
                             if (options.show_message_block){

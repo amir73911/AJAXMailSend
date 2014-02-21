@@ -3,10 +3,10 @@
 
 	$info = $_POST['info'];
 	$data = $_POST['data'];
+	$captions = $_POST['captions'];
 
 	$mail_to  = $info['mail_to'];
 	$email_title  = $info['email_title'];
-	//$email_title = isset($_POST['email_title']) ? $_POST['email_title'] : '';
 
 
 	$headers  = "From: test\r\n";
@@ -17,7 +17,7 @@
 	$msg  = "<html><body style='font-family:Arial,sans-serif;'>";
 	$msg .= "<h2 style='font-weight:bold;border-bottom:1px dotted #ccc;'>".$email_title."</h2>\r\n";
 	foreach ( $data as $key => $value ) {
-    	$msg .= "<p><strong>".$key."</strong> ".$value."</p>\r\n";
+    	$msg .= "<p><strong>".$captions[$key]."</strong> ".$value."</p>\r\n";
     }
 	$msg .= "</body></html>";
 
