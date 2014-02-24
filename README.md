@@ -1,17 +1,22 @@
 # AJAXMailSend
 Отправка писем с помощью JQuery и PHP
 
-## Подключение:
+### Подключение:
 
+```javascript
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/mail_send.js"></script>
+```
 
-## Простое использование (обязательные параметры):
+### Простое использование (обязательные параметры):
 
+```javascript
     $('#form').ajaxMailSend({mail_to: "your@mail.com"});
+```
 
-## Дополнительные параметры:
+### Дополнительные параметры:
 
+```javascript
     $('#form').ajaxMailSend({
       mail_to : 'gafurovamir@gmail.com',
       show_message_block : true,  // показывать блок сообщений?
@@ -21,8 +26,9 @@
       send_button : '.send',
       email_title : 'LETTER HEADER'
     });
+```
 
-## Настройки формы:
+### Настройки формы:
 
 `name="name"` - идентификатор поля 
 
@@ -30,12 +36,13 @@
 
 Для кнопки отправки задать класс `.send_button` (стандартный класс) для привязки скрипта. Также можно использовать любой другой класс, но в дополнительных параметрах при подключении указать `send_button : '.class'` .
 
+```html
     <form action="#" id="form">
         <input type="text" name="name" data-caption="Имя пользователя:" class="required" placeholder="введите ваше имя"/>
         <input type="text" name="phone" data-caption="Телефон пользователя:" placeholder="введите ваш телефон"/>
         <input type="submit" class="send" value="Отправить"/>
     </form>
-
+```
 
 
 ## История версий:
