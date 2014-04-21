@@ -36,7 +36,7 @@
         info['email_title'] = options.email_title;
 
         // создание массива с caption'ами для полей
-        var inputs = form.find('input[type="text"]');
+        var inputs = form.find('input[type="text"], textarea, select');
         inputs.each(function() {
             captions[$(this).attr('name')] = $(this).data('caption');
         });
