@@ -56,6 +56,28 @@ input[type="text"].error {
 	background: rgba(255,8,0,.3);
 }
 
+textarea {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    min-height: 100px;
+    max-height: 200px;
+    padding: 5px 10px;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font: 14px 'Roboto Slab';
+    resize: vertical;
+}
+textarea.required {
+    border: 1px solid red;
+}
+textarea.error {
+    border: 1px solid red;
+    background: rgba(255,8,0,.3);
+}
+
 input[type="submit"], 
 input[type="button"], 
 input[type="reset"] {

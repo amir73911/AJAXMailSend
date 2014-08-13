@@ -13,12 +13,16 @@
 
     <script type="text/javascript">
         $(window).load(function() {
+
             $('#form1').ajaxMailSend({
                 mail_to : 'gafurovamir@gmail.com',
                 req_err_msg : 'Заполните все обязательные поля!',
                 send_button : '.send',
                 email_title : 'LETTER HEADER'
             });
+
+            $('#form2').ajaxMailSend();
+
         });
     </script>
 
@@ -26,14 +30,26 @@
 <body>
 
 <div class="wrapper">
+
     <div class="form">
         <div class="head">Форма отправки сообщений 1</div>
-        <form action="#" id="form1">
+        <form id="form1">
             <input type="text" name="Name" data-caption="Имя пользователя:" class="required" placeholder="введите ваше имя"/>
             <input type="text" name="Phone" data-caption="Телефон пользователя:" placeholder="введите ваш телефон"/>
             <input type="submit" class="send" value="Отправить"/>
         </form>
     </div>
+
+    <div class="form">
+        <div class="head">Форма c "data"</div>
+        <form id="form2" data-mailto="gafurovamir@gmail.com" data-email_title="Test email title">
+            <input type="text" class="required" name="input1" data-caption="Поле 1:" placeholder="Поле 1"/>
+            <input type="text" name="input2" data-caption="Поле 2:" placeholder="Поле 2"/>
+            <textarea name="textarea1" class="required" data-caption="Текстовое поле:" placeholder="Текстовое поле"></textarea>
+            <input type="submit" class="send" value="Отправить"/>
+        </form>
+    </div>
+
 </div>
 </body>
 </html>

@@ -6,8 +6,8 @@
         ok_msg : 'Сообщение успешно отправлено!',
         req_err_msg : 'Вы не заполнили обязательные поля',
         email_err_msg : 'Укажите email для отправки данной формы',
-        email_title : 'Mail from ajaxMailSend',
-        send_button : '.send_button'   // кнопка отправки
+        email_title : '',
+        send_button : 'input[type="submit"]'   // кнопка отправки
     };
 
     $.fn.ajaxMailSend = function(options) {
@@ -17,7 +17,6 @@
         return this.each(function(){
 
             var form = $(this);
-            console.log(form)
             var info = {};
             var captions = {};
 
@@ -25,8 +24,6 @@
             // кнопка отправки
             var button = form.find(config.send_button);
             var default_val = button.val();
-
-
 
             button.removeAttr('disabled');
 
@@ -39,8 +36,22 @@
             }
 
             // создание массива служебной информации
-            info['mail_to'] = config.mail_to;
-            info['email_title'] = config.email_title;
+
+            if (config.mail_to.length) {
+                info['mail_to'] = config.mail_to;
+            } else if (form.data('mailto')) {
+                info['mail_to'] = form.data('mailto');
+            } else {
+                info['mail_to'] = '';
+            }
+
+            if (config.email_title.length) {
+                info['email_title'] = config.email_title;
+            } else if (form.data('email_title')) {
+                info['email_title'] = form.data('email_title');
+            } else {
+                info['email_title'] = 'Mail from ajaxMailSend';
+            }
 
             // создание массива с caption'ами для полей
             var inputs = form.find('input[type="text"], textarea, select');
@@ -61,7 +72,7 @@
             });
 
 
-            // действия при клике
+            // действия при сабмите
             button.click(function(e){
 
                 e.preventDefault();
@@ -88,7 +99,7 @@
 
                 var errors = [];
                 if (empty_fields>0) {errors.push(1);}  // если не заполнены некоторые обязательные поля
-                if (config.mail_to == '') {errors.push(2);}  // если не выбран email для отправки
+                if (info['mail_to'] == '') {errors.push(2);}  // если не выбран email для отправки
 
                 if (errors.length == 0) { // нет ошибок
                     var data = form.serializeObject();
