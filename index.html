@@ -6,18 +6,18 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="js/mail_send.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.ajax-mail-send.js"></script>
 
     <title>AJAX-отправка писем с помощью jQuery и PHP</title>
 
-    <script>
-        $(document).ready(function() {
-            $('#form_1').ajaxMailSend({
-                mail_to : 'gafurovamir@gmail.com'
-            });
-            $('#form_2').ajaxMailSend({
-                mail_to : 'miramir-91@mail.ru'
+    <script type="text/javascript">
+        $(window).load(function() {
+            $('#form1').ajaxMailSend({
+                mail_to : 'gafurovamir@gmail.com',
+                req_err_msg : 'Заполните все обязательные поля!',
+                send_button : '.send',
+                email_title : 'LETTER HEADER'
             });
         });
     </script>
@@ -28,25 +28,12 @@
 <div class="wrapper">
     <div class="form">
         <div class="head">Форма отправки сообщений 1</div>
-        <form id="form_1" class="mail_send" name="form_1" action="#" method="post">
-
-            <input type="text" class="name required" placeholder="Ваше имя"/> <br>
-            <input type="text" class="email required" placeholder="Ваш e-mail"/><br>
-            <input type="text" class="phone required" placeholder="Ваш телефон" /><br>
-            <input type="button" class="send_button" value="Отправить"/>
+        <form action="#" id="form1">
+            <input type="text" name="Name" data-caption="Имя пользователя:" class="required" placeholder="введите ваше имя"/>
+            <input type="text" name="Phone" data-caption="Телефон пользователя:" placeholder="введите ваш телефон"/>
+            <input type="submit" class="send" value="Отправить"/>
         </form>
     </div>
-    <div class="form">
-        <div class="head">Форма отправки сообщений 2</div>
-        <form id="form_2" class="mail_send" name="form_2" action="#" method="post">
-
-            <input type="text" class="name required" placeholder="Ваше имя"/> <br>
-            <input type="text" class="email" placeholder="Ваш e-mail"/><br>
-            <input type="text" class="phone" placeholder="Ваш телефон" /><br>
-            <input type="button" class="send_button" value="Отправить"/>
-        </form>
-    </div>
-    <a href="test.html">Тестовая страница</a>
 </div>
 </body>
 </html>
