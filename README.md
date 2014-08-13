@@ -5,7 +5,7 @@
 
 ```javascript
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="js/mail_send.js"></script>
+    <script src="js/jquery.ajax-mail-send.js"></script>
 ```
 
 ### Простое использование (обязательные параметры):
