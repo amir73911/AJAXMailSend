@@ -78,7 +78,9 @@
                 e.preventDefault();
 
                 button.attr('disabled', 'disabled').val("Отправка...");
-                message_block.html("");
+                if (config.show_message_block) {
+                    message_block.html("");
+                }
 
                 // проверка на пустоту обязательных полей
                 var empty_fields = 0;
